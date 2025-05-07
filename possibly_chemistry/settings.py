@@ -20,6 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 load_dotenv(BASE_DIR / '.env')
 sys.path.append(str(BASE_DIR / "app"))
 
+
+def getenv_int(key, default):
+    try:
+        return int(os.getenv(key, default))
+    except ValueError:
+        return default
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -31,7 +38,8 @@ DEBUG = "True"
 # DEBUG = os.getenv("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+
+# ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost").split(",")
 
 
 # Application definition
@@ -90,6 +98,8 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
         'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': os.getenv('DB_PORT', 5432),
+
+
     }
 }
 
@@ -127,7 +137,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+# STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
