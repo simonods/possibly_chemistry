@@ -1,9 +1,25 @@
 from django.contrib import admin
-from .models.tags import ThematicTag, ThematicRelation
-from .models.content import Lesson, Test, Theory
+from .models import Lesson, Test, ThematicTag, ThematicRelation
 
-admin.site.register(ThematicTag)
-admin.site.register(ThematicRelation)
-admin.site.register(Lesson)
-admin.site.register(Theory)
-admin.site.register(Test)
+@admin.register(Lesson)
+class LessonAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created_at', 'updated_at')
+    list_filter = ('thematic_relations', 'tags')
+    search_fields = ('title', 'description')
+
+
+@admin.register(Test)
+class TestAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created_at', 'updated_at')
+    list_filter = ('thematic_relations', 'tags')
+    search_fields = ('title', 'description')
+
+
+@admin.register(ThematicTag)
+class ThematicTagAdmin(admin.ModelAdmin):
+    search_fields = ['name']
+
+
+@admin.register(ThematicRelation)
+class ThematicRelationAdmin(admin.ModelAdmin):
+    search_fields = ['title']
