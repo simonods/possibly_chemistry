@@ -19,6 +19,9 @@ class ThematicRelation(models.Model):
 
 
 class ThematicTag(models.Model):
+    """
+    Теги тем: дозволяє додавати теги до тем, щоб класифікувати їх за певними критеріями.
+    """
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField(blank=True)
 
